@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+.auth-bg {
+    position: relative;
+    background-image: url("/storage/app/public/static/images/laptop-computer.jpg");
+    background-size: cover;
+    background-position: center;
+}
