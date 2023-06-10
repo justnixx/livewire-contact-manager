@@ -2,16 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Contact as ContactModel;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
-use Livewire\WithFileUploads;
-use Livewire\WithPagination;
 
 class Contact extends Component
 {
     use WithFileUploads;
     use WithPagination;
+
+    protected $listeners = ['searchUpdated' => 'getSearchResults'];
 
     public  $showContactModal      = false;
     public  $showConfirmationModal = false;
@@ -24,6 +26,12 @@ class Contact extends Component
         'mobile'    => 'required|string|unique:contacts,mobile',
         'image'     => 'image|max:1024',                           // 1MB Max
     ];
+    protected $foundContacts; // search results
+
+    public function mount()
+    {
+        $this->getSearchResults(request()->query('f', ''));
+    }
 
     // Contact fields
     public $image, $firstName, $lastName, $mobile, $email;
@@ -149,8 +157,19 @@ class Contact extends Component
         $this->reset();
     }
 
+    public function getSearchResults($value)
+    {
+        if ($value) {
+            $this->foundContacts = ContactModel::where('first_name', 'like', '%' . $value . '%')
+                ->orWhere('last_name', 'like', '%' . $value . '%')
+                ->paginate(env('PER_PAGE', 10));
+        }
+    }
+
     public function render()
     {
-        return view('livewire.contact');
+        return view('livewire.contact', [
+            'foundContacts' => $this->foundContacts
+        ]);
     }
 }

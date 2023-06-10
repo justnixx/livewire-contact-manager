@@ -23,7 +23,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             if ($view->getName() === 'livewire.contact') {
-                $contacts = Contact::where('owner', auth()->id())->orderBy('first_name')->paginate(10);
+                $contacts = Contact::where('owner', auth()->id())->orderBy('first_name')->paginate(env('PER_PAGE', 10));
             } else {
                 $contacts = Contact::where('owner', auth()->id())->get();
             }
