@@ -8,7 +8,7 @@
                 <x-authentication-card-logo />
             </x-slot>
 
-            <p class="text-center my-5 text-sm text-gray-600 hover:text-gray-900">{{ __('Do have an account?') }}
+            <p class="text-center my-5 text-sm text-gray-600 hover:text-gray-900">{{ __('Don\'t have an account?') }}
                 <a href="{{ route('register') }}">Register</a>
             </p>
 
