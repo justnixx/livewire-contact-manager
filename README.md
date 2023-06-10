@@ -2,7 +2,7 @@
 
 This is a demo of the Livewire Contact Manager application.
 
-![Screenshot](https://github.com/justnixx/LivewireContactManager/assets/45858998/93cc613b-b2af-4a4c-ad38-b53a72b9c962)
+![Screenshot](https://github.com/justnixx/livewire-contact-manager/assets/45858998/cafd4248-cb25-4f4e-8d04-06b842e03f85)
 
 # Installation
 
